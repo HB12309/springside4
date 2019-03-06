@@ -29,6 +29,9 @@ public class BookEndpoint {
 
 	private static Logger logger = LoggerFactory.getLogger(BookEndpoint.class);
 
+	/**
+	 * 自动注入，是 Spring的功能，找接口的实现类，见：https://www.jianshu.com/p/9062a92fbf9a
+	 */
 	@Autowired
 	private AccountService accountService;
 
@@ -41,10 +44,23 @@ public class BookEndpoint {
 	@RequestMapping(value = "/api/books", produces = MediaTypes.JSON_UTF_8)
 	public List<BookDto> listAllBook(Pageable pageable) {
 		Iterable<Book> books = adminService.findAll(pageable);
+		logger.debug("books", books);
 
 		return BeanMapper.mapList(books, BookDto.class);
 	}
 
+	/**
+	 * 像 {id} 这种，在 restcontroller 和 feign 中，可能会有出入
+	 * 在微服务的实践过程中，Spring Cloud Ribbon 和 Spring Cloud Hystrix 通常一起使用。
+	 * Spring Cloud Feign 是对这两个基础工具的更高层次封装，在 Netflix Feign 的基础上扩展了对 Spring MVC 的注解支持，提供了一种声明式的 Web 服务客户端定义方式。
+	 *
+	 * 作者：JiangYue
+	 * 链接：https://juejin.im/post/5adee93551882567137dd71f
+	 * 来源：掘金
+	 * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/api/books/{id}", produces = MediaTypes.JSON_UTF_8)
 	public BookDto listOneBook(@PathVariable("id") Long id) {
 		Book book = adminService.findOne(id);
