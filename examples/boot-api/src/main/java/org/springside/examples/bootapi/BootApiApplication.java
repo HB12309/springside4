@@ -18,6 +18,8 @@ public class BootApiApplication {
 	 * 4. 也支持用@Configuration标注的类配置三方包.
 	 */
 	public static void main(String[] args) throws Exception {
+		System.out.println("=== boot-api 准备启动 ===");
 		SpringApplication.run(BootApiApplication.class, args);
+		System.out.println("=== boot-api 启动成功 ===");
 	}
 }
