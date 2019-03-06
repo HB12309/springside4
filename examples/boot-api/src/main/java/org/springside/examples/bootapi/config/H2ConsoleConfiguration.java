@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 /**
  * 在非生产环境里，初始化H2Console管理嵌入式H2.
+ * 纯Java实现的数据库，这么小，牛逼，但用的人不多啊，无法上生产的吧
  * 
  * @author calvin
  */

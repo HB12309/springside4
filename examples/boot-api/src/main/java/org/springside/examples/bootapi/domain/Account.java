@@ -7,6 +7,11 @@ import javax.persistence.Id;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * https://docs.oracle.com/javaee/7/api/javax/persistence/package-summary.html
+ * Java一整套，javax相当于 java 的补充，其实本身已经非常完备了！牛逼。这就是Java的持久化的东西撒
+ * 原来这就是 JPA 啊，Java Persistence API
+ */
 // JPA实体类的标识
 @Entity
 public class Account {
