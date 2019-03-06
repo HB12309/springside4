@@ -24,6 +24,11 @@ public class BookDto {
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+08:00")
 	public Date borrowDate;
 
+	/**
+	 * 为什么要重写 toString ? 常常很多都 Override，怪了
+	 *
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
