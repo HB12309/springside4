@@ -40,12 +40,23 @@ public class AccountService {
 	@Autowired
 	private CounterService counterService;
 
+	/**
+	 * 这种 guava 缓存，就是服务启动的时候，作用域在这个 class 中的东西，是内存型的缓存咯？有 JVM 来开辟内存给它用？
+	 */
 	// guava cache
 	private Cache<String, Account> loginUsers;
 
+	/**
+	 * https://blog.csdn.net/wo541075754/article/details/52174900
+	 * 这种 对于 Bean 生命周期的管理，在后来的 Vue.js 里也有，所谓的钩子函数，原来这 Servlet 也是早期的佼佼者。
+	 * 这种链式调用，常见于：lamba，还有 Node.js 中的 mongoose，很好用
+	 */
 	@PostConstruct
 	public void init() {
-		loginUsers = CacheBuilder.newBuilder().maximumSize(1000).expireAfterAccess(loginTimeoutSecs, TimeUnit.SECONDS)
+		loginUsers = CacheBuilder
+				.newBuilder()
+				.maximumSize(1000)
+				.expireAfterAccess(loginTimeoutSecs, TimeUnit.SECONDS)
 				.build();
 	}
 
